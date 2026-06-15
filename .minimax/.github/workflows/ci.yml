@@ -1,0 +1,83 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master, develop]
+
+jobs:
+  install-check:
+    name: Project Install Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Validate project.json
+        run: |
+          jq -e '.project_id, .version, .mavis_required_version' project.json
+          echo "✓ project.json valid"
+
+      - name: Validate paths.json
+        run: |
+          jq -e '.required_files_globs | length' config/paths.json
+          echo "✓ paths.json valid"
+
+      - name: Validate platform.json
+        run: |
+          jq -e '.platforms.windows, .platforms.linux, .platforms.macos' config/platform.json
+          echo "✓ platform.json covers all platforms"
+
+      - name: Check required files exist
+        run: |
+          while IFS= read -r f; do
+            [ -f "$f" ] || { echo "MISSING: $f"; exit 1; }
+          done < <(jq -r '.required_files_globs[]' config/paths.json)
+          echo "✓ all required files present"
+
+      - name: Validate agents/registry.json
+        run: |
+          jq -e '.agents' agents/registry.json > /dev/null
+          AGENT_COUNT=$(jq '.agents | length' agents/registry.json)
+          echo "✓ registry.json has $AGENT_COUNT agent(s)"
+
+      - name: Validate workflows/INDEX.md
+        run: |
+          [ -f workflows/INDEX.md ] || { echo "MISSING: workflows/INDEX.md"; exit 1; }
+          WORKFLOW_COUNT=$(grep -c '^| feature\|^| bugfix\|^| review\|^| deploy\|^| doc' workflows/INDEX.md || true)
+          echo "✓ INDEX.md has $WORKFLOW_COUNT workflow(s)"
+
+      - name: Validate sub-agent manifests
+        run: |
+          for d in agents/*/; do
+            if [ -f "$d/manifest.json" ]; then
+              jq -e '.id, .version, .triggers' "$d/manifest.json" > /dev/null
+              echo "  ✓ $(basename $d)/manifest.json valid"
+            fi
+          done
+
+      - name: Validate固化工作流 frontmatter
+        run: |
+          for f in workflows/*.md; do
+            if [[ "$f" == workflows/_* ]] || [[ "$f" == workflows/README.md ]] || [[ "$f" == workflows/INDEX.md ]]; then continue; fi
+            head -1 "$f" | grep -q '^---$' || { echo "MISSING frontmatter: $f"; exit 1; }
+            grep -q '^workflow_id:' "$f" || { echo "MISSING workflow_id: $f"; exit 1; }
+            echo "  ✓ $f valid"
+          done
+
+      - name: Shell syntax check (scripts/*.sh)
+        run: |
+          for f in scripts/*.sh; do
+            bash -n "$f" || { echo "SYNTAX ERROR: $f"; exit 1; }
+            echo "  ✓ $f syntax ok"
+          done
+
+      - name: Simulate install (no mavis, just file check)
+        run: |
+          echo "Note: real install requires mavis runtime"
+          echo "Simulating file presence check..."
+          ./scripts/install.sh 2>&1 | tail -10 || echo "(install may fail due to missing mavis in CI - that's ok)"

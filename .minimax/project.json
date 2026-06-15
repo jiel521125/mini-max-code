@@ -1,0 +1,91 @@
+{
+  "project_id": "tianshu-agent-001",
+  "project_name": "天枢多智能体调度系统",
+  "project_name_en": "TianShu Multi-Agent Orchestration System",
+  "version": "1.0.0",
+  "schema_version": "1.0.0",
+  "mavis_required_version": ">=0.5.0",
+  "agent_name": "mavis",
+  "workspace_root": ".",
+  "platforms": ["windows", "macos", "linux"],
+  "structure": {
+    "agents_dir": "./agents",
+    "workflows_dir": "./workflows",
+    "rules_dir": "./rules",
+    "config_dir": "./config",
+    "scripts_dir": "./scripts",
+    "memory_dir": "./memory",
+    "hooks_dir": "./hooks",
+    "registry_file": "./agents/registry.json",
+    "workflows_index": "./workflows/INDEX.md",
+    "decisions_log": "./rules/workflow-decisions.md"
+  },
+  "required_files": [
+    "./README.md",
+    "./project.json",
+    "./agents/README.md",
+    "./agents/_schema.md",
+    "./agents/registry.json",
+    "./workflows/README.md",
+    "./workflows/_intent-router.md",
+    "./workflows/_template.md",
+    "./workflows/INDEX.md",
+    "./rules/workflow-decisions.md",
+    "./config/paths.json",
+    "./config/platform.json",
+    "./scripts/install.sh",
+    "./hooks/project-bootstrap-check.md",
+    "./memory/_schema.md",
+    "./memory/_README.md",
+    "./memory/_compress.md",
+    "./memory/_wakeup-protocol.md"
+  ],
+  "hooks": [
+    {
+      "id": "mavis:project-bootstrap-check",
+      "file": "hooks/project-bootstrap-check.md",
+      "event": "SessionStart",
+      "type": "script",
+      "priority": 5,
+      "timeout_ms": 10000,
+      "install_command_unix": "mavis hook create project-bootstrap-check --event SessionStart --type script --agent mavis --priority 5 --timeout 10000 --file ./hooks/project-bootstrap-check.md",
+      "uninstall_command": "mavis hook delete mavis:project-bootstrap-check"
+    },
+    {
+      "id": "mavis:memory-write-reminder",
+      "file": "hooks/memory-write-reminder.md",
+      "event": "PostToolUse",
+      "type": "prompt",
+      "priority": 40,
+      "timeout_ms": 5000,
+      "install_command_unix": "mavis hook create memory-write-reminder --event PostToolUse --type prompt --agent mavis --priority 40 --timeout 5000 --file ./hooks/memory-write-reminder.md",
+      "uninstall_command": "mavis hook delete mavis:memory-write-reminder"
+    },
+    {
+      "id": "mavis:memory-write-enforce",
+      "file": "hooks/memory-write-enforce.md",
+      "event": "SessionEnd",
+      "type": "script",
+      "priority": 5,
+      "timeout_ms": 15000,
+      "install_command_unix": "mavis hook create memory-write-enforce --event SessionEnd --type script --agent mavis --priority 5 --timeout 15000 --file ./hooks/memory-write-enforce.md",
+      "uninstall_command": "mavis hook delete mavis:memory-write-enforce"
+    }
+  ],
+  "memory_injection": {
+    "file": "~/.mavis/agents/mavis/memory/MEMORY.md",
+    "section": "项目必读清单",
+    "managed_by": "main-agent"
+  },
+  "emergency": {
+    "skip_env_var": "MAVIS_PROJECT_BOOTSTRAP_SKIP",
+    "skip_value": "1"
+  },
+  "author": {
+    "name": "TianShu (天枢)",
+    "email": "1033085514@qq.com",
+    "wechat": "1033085514"
+  },
+  "license": "MIT",
+  "exported_at": "2026-06-15T20:58:00+08:00"
+}

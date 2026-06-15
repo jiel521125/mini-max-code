@@ -1,0 +1,42 @@
+{
+  "id": "code-reviewer-v1",
+  "role": "code-reviewer",
+  "version": "1.0.0",
+  "description": "代码审查专家，9 维度质量检查清单（命名/结构/异常/性能/安全/可测/可维护/文档/边界）",
+  "triggers": [
+    "review",
+    "审查",
+    "代码审查",
+    "code review",
+    "review code",
+    "check code"
+  ],
+  "capabilities": [
+    "9 维度静态代码分析",
+    "命名规范检查",
+    "代码结构评估",
+    "异常处理审计",
+    "性能瓶颈识别",
+    "安全漏洞扫描（OWASP Top 10）",
+    "可测试性评估",
+    "可维护性评分",
+    "文档完整性检查",
+    "边界条件覆盖度"
+  ],
+  "inputs": {
+    "code_path": "string, 必填, 待审查的代码文件或目录路径",
+    "language": "string, 可选, 代码语言（auto/csharp/python/typescript/...），默认 auto",
+    "check_dimensions": "array<string>, 可选, 指定要检查的维度子集，默认全 9 维度",
+    "severity_threshold": "string, 可选, 报告阈值（info/warn/error/critical），默认 warn"
+  },
+  "outputs": {
+    "verdict": "string: pass | warn | fail",
+    "score": "number, 0-100, 综合评分",
+    "issues": "array<issue>, {dimension, severity, line, message, suggestion}",
+    "summary": "string, 一句话总结",
+    "report_path": "string, 详细报告的输出路径"
+  },
+  "dependencies": [],
+  "tags": ["quality", "review", "static-analysis"],
+  "enabled": true
+}

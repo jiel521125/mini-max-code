@@ -1,0 +1,71 @@
+{
+  "_comment": "跨平台差异映射。Hook 脚本和 install 脚本会读这个文件，自动适配。",
+  "current_platform_auto": true,
+  "platforms": {
+    "windows": {
+      "os_family": "windows",
+      "shell": {
+        "default": "bash",
+        "fallback": "sh",
+        "recommended": "Git Bash",
+        "powershell_compatible": true
+      },
+      "path_separator": "/",
+      "path_env_separator": ":",
+      "home_env": "USERPROFILE",
+      "home_fallback": "HOME",
+      "line_ending": "\r\n",
+      "permissions": {
+        "executable_bit_required": false,
+        "executable_extension": [".exe", ".bat", ".cmd", ".sh"]
+      },
+      "zip_command": "powershell -Command \"Compress-Archive -Path '{source}/*' -DestinationPath '{target}'\"",
+      "unzip_command": "powershell -Command \"Expand-Archive -Path '{source}' -DestinationPath '{target}'\"",
+      "null_device": "NUL",
+      "test": "uname -s 2>/dev/null | grep -qi mingw || echo windows"
+    },
+    "macos": {
+      "os_family": "unix",
+      "shell": {
+        "default": "zsh",
+        "fallback": "bash"
+      },
+      "path_separator": "/",
+      "path_env_separator": ":",
+      "home_env": "HOME",
+      "line_ending": "\n",
+      "permissions": {
+        "executable_bit_required": true,
+        "executable_extension": [".sh"]
+      },
+      "zip_command": "zip -r '{target}' '{source}'",
+      "unzip_command": "unzip -o '{source}' -d '{target}'",
+      "null_device": "/dev/null",
+      "test": "uname -s | grep -qi darwin"
+    },
+    "linux": {
+      "os_family": "unix",
+      "shell": {
+        "default": "bash",
+        "fallback": "sh"
+      },
+      "path_separator": "/",
+      "path_env_separator": ":",
+      "home_env": "HOME",
+      "line_ending": "\n",
+      "permissions": {
+        "executable_bit_required": true,
+        "executable_extension": [".sh"]
+      },
+      "zip_command": "zip -r '{target}' '{source}'",
+      "unzip_command": "unzip -o '{source}' -d '{target}'",
+      "null_device": "/dev/null",
+      "test": "uname -s | grep -qi linux"
+    }
+  },
+  "detection_priority": [
+    "macos",
+    "linux",
+    "windows"
+  ]
+}

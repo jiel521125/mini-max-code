@@ -1,0 +1,39 @@
+{
+  "id": "coder-v1",
+  "role": "coder",
+  "version": "1.0.0",
+  "description": "业务逻辑编码专家，支持多语言（c#/python/typescript/go/java）",
+  "triggers": [
+    "code",
+    "代码",
+    "编码",
+    "实现",
+    "写代码",
+    "implement",
+    "develop"
+  ],
+  "capabilities": [
+    "多语言编码（c#/python/typescript/go/java）",
+    "业务逻辑实现",
+    "数据库操作（ORM/SQL）",
+    "API 端点实现",
+    "重构现有代码",
+    "单元测试伴随编码"
+  ],
+  "inputs": {
+    "design_notes": "string, 必填, 设计文档或接口约定",
+    "target_files": "array<string>, 必填, 待创建/修改的文件路径",
+    "language": "string, 可选, auto/csharp/python/typescript/go/java",
+    "style_guide": "string, 可选, 默认项目内 .editorconfig",
+    "include_tests": "boolean, 可选, 是否同时写测试，默认 true"
+  },
+  "outputs": {
+    "code_files": "array<string>, 实际写过的文件",
+    "commit_message": "string, 建议的 commit 信息",
+    "test_files": "array<string>, 配套测试（若 include_tests=true）",
+    "implementation_notes": "string, 实现说明"
+  },
+  "dependencies": ["api-designer-v1"],
+  "tags": ["code", "develop", "implementation"],
+  "enabled": true
+}

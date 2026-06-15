@@ -1,0 +1,41 @@
+{
+  "id": "api-designer-v1",
+  "role": "api-designer",
+  "version": "1.0.0",
+  "description": "接口设计专家，RESTful/GraphQL 接口规范设计 + OpenAPI 文档生成",
+  "triggers": [
+    "api",
+    "接口",
+    "接口设计",
+    "restful",
+    "graphql",
+    "openapi",
+    "swagger",
+    "endpoint"
+  ],
+  "capabilities": [
+    "RESTful API 设计",
+    "GraphQL Schema 设计",
+    "OpenAPI 3.1 规范生成",
+    "接口版本管理",
+    "HTTP 状态码语义",
+    "请求/响应 schema 校验",
+    "错误码体系设计"
+  ],
+  "inputs": {
+    "resource_name": "string, 必填, 资源名（如 user/order）",
+    "operations": "array<string>, 必填, [create|read|update|delete|list]",
+    "auth_required": "boolean, 可选, 默认 true",
+    "version": "string, 可选, 默认 v1",
+    "style": "string, 可选, restful|graphql，默认 restful"
+  },
+  "outputs": {
+    "endpoints": "array<endpoint>",
+    "openapi_spec": "object, 完整 OpenAPI 3.1 文档",
+    "design_notes": "string, 设计说明",
+    "schema_paths": "array<string>, 生成的文件路径"
+  },
+  "dependencies": [],
+  "tags": ["design", "api", "spec"],
+  "enabled": true
+}

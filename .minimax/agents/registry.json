@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "last_scan_time": "2026-06-15T21:07:00+08:00",
+  "last_scan_source": "E:\\TianShu\\Agent\\agents\\",
+  "agents": [
+    {
+      "id": "code-reviewer-v1",
+      "role": "code-reviewer",
+      "version": "1.0.0",
+      "manifest_path": "agents/code-reviewer-v1/manifest.json",
+      "prompt_path": "agents/code-reviewer-v1/prompt.md",
+      "enabled": true,
+      "registered_at": "2026-06-15T20:48:00+08:00"
+    },
+    {
+      "id": "api-designer-v1",
+      "role": "api-designer",
+      "version": "1.0.0",
+      "manifest_path": "agents/api-designer-v1/manifest.json",
+      "prompt_path": "agents/api-designer-v1/prompt.md",
+      "enabled": true,
+      "registered_at": "2026-06-15T21:07:00+08:00"
+    },
+    {
+      "id": "test-generator-v1",
+      "role": "test-generator",
+      "version": "1.0.0",
+      "manifest_path": "agents/test-generator-v1/manifest.json",
+      "prompt_path": "agents/test-generator-v1/prompt.md",
+      "enabled": true,
+      "registered_at": "2026-06-15T21:07:00+08:00"
+    },
+    {
+      "id": "coder-v1",
+      "role": "coder",
+      "version": "1.0.0",
+      "manifest_path": "agents/coder-v1/manifest.json",
+      "prompt_path": "agents/coder-v1/prompt.md",
+      "enabled": true,
+      "registered_at": "2026-06-15T21:07:00+08:00"
+    }
+  ],
+  "registry_notes": "此文件由主 agent 启动时自动维护。子 Agent 实际列表以 E:\\TianShu\\Agent\\agents\\ 目录为准。"
+}

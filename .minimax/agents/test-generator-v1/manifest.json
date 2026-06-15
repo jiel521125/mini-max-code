@@ -1,0 +1,40 @@
+{
+  "id": "test-generator-v1",
+  "role": "test-generator",
+  "version": "1.0.0",
+  "description": "自动化测试生成专家，覆盖单元/集成/E2E 三层测试",
+  "triggers": [
+    "test",
+    "测试",
+    "测试用例",
+    "单元测试",
+    "集成测试",
+    "e2e",
+    "测试生成",
+    "generate test"
+  ],
+  "capabilities": [
+    "单元测试生成（xUnit/NUnit/JUnit/PyTest/Jest）",
+    "集成测试生成（API 端到端）",
+    "E2E 测试生成（Playwright/Cypress）",
+    "测试覆盖率分析",
+    "Mock 桩生成",
+    "边界条件用例覆盖"
+  ],
+  "inputs": {
+    "code_path": "string, 必填, 待测试的代码文件或目录",
+    "test_type": "string, 可选, unit|integration|e2e|all，默认 all",
+    "framework": "string, 可选, 自动检测（nunit/xunit/pytest/jest/...）",
+    "coverage_target": "number, 可选, 目标覆盖率 0-100，默认 80",
+    "test_file_output_dir": "string, 可选, 默认与源文件同目录"
+  },
+  "outputs": {
+    "test_files": "array<string>, 生成的测试文件路径",
+    "coverage_report": "object, { lines, branches, functions }",
+    "test_summary": "string, 总结",
+    "mock_objects": "array<string>, mock 桩文件"
+  },
+  "dependencies": [],
+  "tags": ["test", "qa", "automation"],
+  "enabled": true
+}

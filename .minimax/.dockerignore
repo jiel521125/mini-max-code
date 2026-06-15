@@ -1,0 +1,18 @@
+# Docker 忽略
+node_modules
+__pycache__
+*.log
+*.tmp
+*.bak
+*.old
+.git
+.gitignore
+.github
+.gitea
+.vscode
+.idea
+*.zip
+reports/
+secrets/
+.env
+.env.local

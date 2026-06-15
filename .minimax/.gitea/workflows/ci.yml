@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+
+jobs:
+  install-check:
+    name: Project Install Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+      - name: Validate project.json
+        run: |
+          jq -e '.project_id, .version, .mavis_required_version' project.json
+      - name: Validate paths.json
+        run: jq -e '.required_files_globs | length' config/paths.json
+      - name: Check required files exist
+        run: |
+          while IFS= read -r f; do
+            [ -f "$f" ] || { echo "MISSING: $f"; exit 1; }
+          done < <(jq -r '.required_files_globs[]' config/paths.json)
+      - name: Validate agents/registry.json
+        run: jq -e '.agents' agents/registry.json > /dev/null
+      - name: Shell syntax check (scripts/*.sh)
+        run: |
+          for f in scripts/*.sh; do
+            bash -n "$f" || { echo "SYNTAX ERROR: $f"; exit 1; }
+          done
+      - name: Simulate install
+        run: |
+          echo "Note: real install requires mavis runtime, this is just file presence check"
+          ls -la scripts/

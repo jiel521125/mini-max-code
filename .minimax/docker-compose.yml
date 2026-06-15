@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  tianshu-agent:
+    build: .
+    container_name: tianshu-agent
+    restart: unless-stopped
+    environment:
+      # mavis daemon 端口（按你机器实际配置调整）
+      - MAVIS_DAEMON_HOST=host.docker.internal
+      - MAVIS_DAEMON_PORT=15321
+      # 应急逃生（默认不开启）
+      - MAVIS_PROJECT_BOOTSTRAP_SKIP=${MAVIS_PROJECT_BOOTSTRAP_SKIP:-}
+    volumes:
+      # 挂载 mavis 配置（让容器能访问主机的 mavis 状态）
+      - ~/.mavis:/root/.mavis:ro
+      # 工作区挂载（如果你在容器里跑 mavis）
+      - ${WORKSPACE_DIR:-./}:/workspace:rw
+    extra_hosts:
+      # 让容器能访问宿主机
+      - "host.docker.internal:host-gateway"
+    command: ["bash", "-c", "./scripts/install.sh && tail -f /dev/null"]
