@@ -127,6 +127,30 @@ cp -r /old/.minimax /new-project/
 
 ---
 
+## 💖 支持本框架
+
+如果这个框架对您有帮助，欢迎扫码支持我们的工作！
+
+### 📞 联系方式
+
+- **微信号**: `longling1031`
+- **邮箱**: `1033085514@qq.com`
+
+如果您觉得我的方法论有用，那就请我喝杯茶吧  :blush: ！
+
+<table>
+  <tr>
+    <td style="text-align: center; padding: 10px;">
+      <img src="https://gitee.com/jiel521125/intelligent-agent-methodology/raw/master/pay1.jpg" alt="龙麟之心" width="200">
+    </td>
+    <td style="text-align: center; padding: 10px;">
+      <img src="https://gitee.com/jiel521125/intelligent-agent-methodology/raw/master/pay2.jpg" alt="键盘先森" width="200">
+    </td>
+  </tr>
+</table>
+
+---
+
 **下一步**：
 - 📖 [`.minimax/README.md`](./.minimax/README.md) — 详细使用文档
 - 🛠️ [`.minimax/workflows/README.md`](./.minimax/workflows/README.md) — 双模式工作流引擎
