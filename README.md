@@ -141,10 +141,10 @@ cp -r /old/.minimax /new-project/
 <table>
   <tr>
     <td style="text-align: center; padding: 10px;">
-      <img src="https://gitee.com/jiel521125/intelligent-agent-methodology/raw/master/pay1.jpg" alt="龙麟之心" width="200">
+      <img src="https://gitee.com/jiel521125/mini-max-code/raw/master/pay1.jpg" alt="龙麟之心" width="200">
     </td>
     <td style="text-align: center; padding: 10px;">
-      <img src="https://gitee.com/jiel521125/intelligent-agent-methodology/raw/master/pay2.jpg" alt="键盘先森" width="200">
+      <img src="https://gitee.com/jiel521125/mini-max-code/raw/master/pay2.jpg" alt="键盘先森" width="200">
     </td>
   </tr>
 </table>
