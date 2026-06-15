@@ -127,6 +127,22 @@ cp -r /old/.minimax /new-project/
 
 ---
 
+## 💖 Support this framework
+
+If you find my methodology useful, treat me to a cup of tea  :blush: ！
+
+<table>
+  <tr>
+    <td style="text-align: center; padding: 10px;">
+      <img src="https://gitee.com/jiel521125/mini-max-code/raw/master/pay1.jpg" alt="龙麟之心" width="200">
+    </td>
+    <td style="text-align: center; padding: 10px;">
+      <img src="https://gitee.com/jiel521125/mini-max-code/raw/master/pay2.jpg" alt="键盘先森" width="200">
+    </td>
+  </tr>
+</table>
+
+
 **Next steps**:
 - 📖 [`.minimax/README.md`](./.minimax/README.md) — Detailed usage guide
 - 🛠️ [`.minimax/workflows/README.md`](./.minimax/workflows/README.md) — Dual-mode workflow engine
